@@ -8,20 +8,12 @@ fi
 
 echo "Dang you already gave me sudo permission !!! "
 # Define the list of packages
-packages=(git cmake make stow tmux)
+packages=(git neovim stow tmux)
 
 # Install packages using pacman (modify if using another package manager)
 echo "Installing packages..."
 pacman -S --noconfirm "${packages[@]}"
-
-echo "Installing neovim v0.10.4 ..."
-git clone --branch v0.10.4 --depth=1 https://github.com/neovim/neovim.git
-cd neovim
-make CMAKE_BUILD_TYPE=Release
-make install
-
 cd $HOME
-
 echo "Cloing the tmux plugin manager that you gonna use ..."
 git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
