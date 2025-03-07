@@ -1,23 +1,24 @@
 #!/usr/bin/env bash
 
 # Ensure the script runs with root privileges
-if [[ $EUID -ne 0 ]]; then
-    echo "Please run as root: sudo $0"
-    exit 1
-fi
+# if [[ $EUID -ne 0 ]]; then
+#     echo "Please run as root: sudo $0"
+#     exit 1
+# fi
 
+echo "Dang you already gave me sudo permission !!! "
 # Define the list of packages
 packages=(git cmake make stow rust-analyzer tmux kitty starship zsh)
 
 # Install packages using pacman (modify if using another package manager)
 echo "Installing packages..."
-sudo pacman -S --noconfirm "${packages[@]}"
+pacman -S --noconfirm "${packages[@]}"
 
 echo "Installing neovim v0.10.4 ..."
 git clone --branch v0.10.4 --depth=1 https://github.com/neovim/neovim.git
 cd neovim
 make CMAKE_BUILD_TYPE=Release
-sudo make install
+make install
 
 cd $HOME
 
