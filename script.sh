@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
 # Ensure the script runs with root privileges
-# if [[ $EUID -ne 0 ]]; then
-#     echo "Please run as root: sudo $0"
-#     exit 1
-# fi
+if [[ $EUID -ne 0 ]]; then
+    echo "Please run as root: sudo $0"
+    exit 1
+fi
 
 echo "Dang you already gave me sudo permission !!! "
 # Define the list of packages
-packages=(git cmake make stow rust-analyzer tmux kitty starship zsh)
+packages=(git cmake make stow tmux)
 
 # Install packages using pacman (modify if using another package manager)
 echo "Installing packages..."
@@ -22,6 +22,7 @@ make install
 
 cd $HOME
 
+echo "Cloing the tmux plugin manager that you gonna use ..."
 git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
 # Clone dotfiles repository
@@ -31,6 +32,6 @@ git clone --depth=1 -b main https://github.com/SantoshShrestha11/dotfiles.git $H
 # Stow the dotfiles
 cd $HOME/dotfiles || exit
 echo "Stowing dotfiles..."
-stow nvim zsh tmux kitty starship
+stow nvim tmux
 
 echo "Setup complete!"
