@@ -8,6 +8,8 @@ fi
 
 echo "Dang you already gave me sudo permission !!! "
 # Define the list of packages
+pacman -Syu
+pacman -S sudo
 packages=(git neovim stow tmux)
 
 # Install packages using pacman (modify if using another package manager)
